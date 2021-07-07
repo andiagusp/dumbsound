@@ -1,0 +1,158 @@
+@font-face {
+  font-family: 'product_sansregular';
+  src: local('product_sans_regular-webfont.woff2'), url(../fonts/product-sans-regular.woff) format('woff2'),
+       local('product_sans_regular-webfont.woff'), url(../fonts/product-sans-regular.woff) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --DOM-color: #161616;
+  --modal-bg: rgba(1, 1, 1, 0.6);
+  --card-color: #3a3a3a;
+  --color-red: #ee4622;
+  --text-white: #fff;
+}
+
+body {
+  font-family: 'product_sansregular';
+  background-color: var(--DOM-color);
+  color: var(--text-white);
+  max-width: 1440px;
+  font-size: 14px;
+}
+
+/* header landing page */
+.lp-header {
+  height: 512px;
+  background: url(../image/landing-cover.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 1px 10px rgba(46, 37, 37, 0.8);
+}
+
+.lp-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background-color: transparent;
+}
+
+.lp-icon > img {
+  margin: 0 10px;
+}
+
+.lp-btn-login,
+.lp-btn-register {
+  width: 100px;
+  border-radius: 5px;
+  padding: 6px;
+  font-weight: 700;
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.lp-btn-register {
+  background-color: var(--color-red);
+  border: none;
+}
+
+.lp-btn-login {
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+
+.lp-btn-login:active,
+.lp-btn-register:active {
+  opacity: 0.5;
+}
+
+.lp-text-jumbotron {
+  transform: translateY(100px);
+  text-align: center;
+  text-shadow: 2px 5px 5px rgba(11, 11, 11, 100);
+}
+
+.lp-text-title {
+  font-size: 48px;
+  margin-bottom: 0;
+}
+
+.lp-text-second {
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+.lp-modal {
+  position: fixed;
+  background-color: var(--modal-bg);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.lp-modal-content-login {
+  
+}
+
+/* landing body */
+.lp-body {
+  margin: 40px;
+}
+
+.lpb-title {
+  color: var(--color-red);
+  font-weight: 700;
+  text-align: center;
+  font-size: 24px;
+}
+
+.lpb-wrapper-music {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px;
+}
+
+.lpb-card-music {
+  height: 240px;
+  width: 190px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin: 10px;
+  background-color: var(--card-color);
+  box-shadow: 0 2px 5px rgba(100, 100, 100, 0.8),
+              0 -2px 5px rgba(100, 100, 100, 0.8);
+}
+
+.lpb-card-music > img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.lpb-card-music > p {
+  margin-top: -1em;
+}
+
+.lpb-music-ty {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.lpb-title-music {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 1200px) {
+}
