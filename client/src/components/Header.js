@@ -1,26 +1,40 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import Dumbsound from '../image/dumbsound.png'
 import LogoShapes from '../image/logo-shapes.png'
 import LoginModal from './LoginModal'
+import RegisterModal from './RegisterModal'
 
 const Header = () => {
+  const history = useHistory()
   const [visibleLoginModal, setVisibleLoginModal] = useState(false)
+  const [visibleRegisterModal, setVisibleRegisterModal] = useState(false)
 
   const onClickLogin = () => setVisibleLoginModal(!visibleLoginModal)
+  const onClickRegister = () => setVisibleRegisterModal(!visibleRegisterModal)
 
   return (
     <header className="lp-header">
       <nav className="lp-nav">
-        <section className="lp-icon">
+        <section className="lp-icon" onClick={ () => history.push('/')}>
           <img src={ LogoShapes } alt="icon-side" />
           <img src={ Dumbsound } alt="icon-side" />
         </section>
 
-        <LoginModal visibleLoginModal={ visibleLoginModal } setVisibleLoginModal={ setVisibleLoginModal } />
+        <LoginModal
+          visibleLoginModal={ visibleLoginModal }
+          setVisibleLoginModal={ setVisibleLoginModal }
+          setVisibleRegisterModal={ setVisibleRegisterModal }
+        />
+        <RegisterModal
+          visibleRegisterModal={ visibleRegisterModal }
+          setVisibleRegisterModal={ setVisibleRegisterModal }
+          setVisibleLoginModal={ setVisibleLoginModal }
+        />
         <section className="lp-btn-group">
           <button type="button" className="lp-btn-login" onClick={ onClickLogin }>Login</button>
-          <button type="button" className="lp-btn-register">Register</button>
+          <button type="button" className="lp-btn-register" onClick={ onClickRegister }>Register</button>
         </section>
       </nav>
 

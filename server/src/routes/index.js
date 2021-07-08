@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { register, login } = require('../controllers/UserController')
+const { register, login, userAuth } = require('../controllers/UserController')
 const { addArtist, destroyArtist } = require('../controllers/ArtisController')
 const { addTransaction, getAllTransaction } = require('../controllers/TransactionController')
 const { getAllMusic, addMusic } = require('../controllers/MusicController')
@@ -11,6 +11,7 @@ const fileupload = require('../middleware/fileupload')
 
 router.post('/login', login)
 router.post('/register', register)
+router.get('/authorization', verifyToken, userAuth)
 
 router.post('/artist', verifyToken, addArtist)
 router.delete('/artist/:id', verifyToken, destroyArtist)

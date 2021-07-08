@@ -1,6 +1,7 @@
 const { user } = require('../../models')
 const bcrypt = require('bcrypt')
 const NotFoundError = require('../exceptions/NotFoundError')
+const AuthenticationError = require('../exceptions/AuthenticationError')
 const InvariantError = require('../exceptions/InvariantError')
 
 const UserModel = {
@@ -11,9 +12,14 @@ const UserModel = {
     const create = await user.create({ ...data, password: hashedPassword })
     const result = await user.findOne({ where: { id: create.id } })
     if (!result) {
-      throw new NotFoundError('user not found')
+      throw new AuthenticationError('user not found')
     }
-    return ({ id: result.id, email: result.email, status: result.listAs })
+    return ({
+      id: result.id,
+      email: result.email,
+      status: result.listAs,
+      subscribe: result.subscribe
+    })
   },
   checkEmail: async function (email) {
     const result = await user.findOne({
@@ -30,14 +36,26 @@ const UserModel = {
       where: { email: email }
     })
     if (!result) {
-      throw new NotFoundError('email or password invalid')
+      throw new AuthenticationError('email or password invalid')
     }
     const match = await bcrypt.compare(password, result.password)
     if (!match) {
-      throw new NotFoundError('email or password invalid')
+      throw new AuthenticationError('email or password invalid')
     }
-
-    return ({ id: result.id, email: result.email, status: result.listAs })
+    return ({
+      id: result.id,
+      email: result.email,
+      status: result.listAs,
+      subscribe: result.subscribe
+    })
+  },
+  getUserByEmail: async function (email) {
+    const result = await user.findOne({
+      where: { email: email },
+      attributes: ['id', 'email', 'fullName', 'subscribe', ['listAs', 'status']]
+    })
+    if (!result) throw new AuthenticationError('Please login again')
+    return result
   }
 }
 

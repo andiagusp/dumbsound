@@ -6,7 +6,10 @@ const { UserModel } = require('../models/UserModel')
 
 const register = async (req, res) => {
   try {
-    const listAs = '0'
+    let listAs = '0'
+    if (req.body.listAs) {
+      listAs = '1'
+    }
     const subscribe = 'false'
     registerValidator.registerValidate(req.body)
     const result = await UserModel.postRegister({ ...req.body, listAs, subscribe })
@@ -14,7 +17,10 @@ const register = async (req, res) => {
 
     res.status(201).send({
       status: 'success',
-      token
+      user: {
+        ...result,
+        token
+      }
     })
   } catch (error) {
     if (error instanceof ClientError) {
@@ -65,4 +71,31 @@ const login = async (req, res) => {
   }
 }
 
-module.exports = { register, login }
+const userAuth = async (req, res) => {
+  try {
+    const { email } = req.accessToken
+    const result = await UserModel.getUserByEmail(email)
+    res.status(200).send({
+      status: 'success',
+      user: result
+    })
+  } catch (error) {
+    if (error instanceof ClientError) {
+      console.log(error)
+      const response = res.status(error.statusCode).send({
+        status: 'failed',
+        message: error.message
+      })
+      return response
+    }
+
+    const response = res.status(500).send({
+      status: 'failed',
+      message: error.message
+    })
+    console.log(error)
+    return response
+  }
+}
+
+module.exports = { register, login, userAuth }

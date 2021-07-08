@@ -1,110 +1,70 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-import thumbnail from '../image/music-thumbnail.png'
+import { server } from '../config/axios'
+import LoginModal from './LoginModal'
+import RegisterModal from './RegisterModal'
+
+import thumbnails from '../image/music-thumbnail.png'
 
 const LandingPageContent = () => {
+  const thumbnail = 'http://localhost:5000/public/thumbnail/'
+  const [visibleLoginModal, setVisibleLoginModal] = useState(false)
+  const [visibleRegisterModal, setVisibleRegisterModal] = useState(false)
+  const [isLoading, setLoading] = useState('')
+  const [musics, setMusics] = useState()
+
+  useEffect(() => {
+    getMusics()
+    return () => setMusics()
+  }, [])
+
+  const getMusics = async () => {
+    try {
+      setLoading('loading data...')
+      const res = await server.get('/musics')
+      console.log(res?.data.musics)
+      setMusics(res?.data.musics)
+    } catch (error) {
+      console.log(error?.response)
+    } finally {
+      setLoading('')
+    }
+  }
+
+  const onClickLogin = () => setVisibleLoginModal(!visibleLoginModal)
+
   return (
-    <div className="lp-body">
+    <main className="lp-body">
       <p className="lpb-title">Dengarkan dan Rasakan</p>
-      <section className="lpb-wrapper-music">
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
-        <div className="lpb-card-music">
-          <img src={ thumbnail } alt="thumbnail-music" />
-          <div className="lpb-music-ty">
-            <p className="lpb-title-music">Logic</p>
-            <p>2019</p>
-          </div>
-          <p>Keanu Recees</p>
-        </div>
+      <LoginModal
+        visibleLoginModal={ visibleLoginModal }
+        setVisibleLoginModal={ setVisibleLoginModal }
+        setVisibleRegisterModal={ setVisibleRegisterModal }
+      />
+      <RegisterModal
+        visibleRegisterModal={ visibleRegisterModal }
+        setVisibleRegisterModal={ setVisibleRegisterModal }
+        setVisibleLoginModal={ setVisibleLoginModal }
+      />
+      <section className="lpb-wrapper-music" onClick={ onClickLogin }>
+        { isLoading && <h1 style={{ fontSize: 24, color: '#fff' }}>{ isLoading }</h1> }
+        { musics?.map((music, i) => (
+            <div className="lpb-card-music" key={ i }>
+              <img src={ thumbnail + music.thumbnail} alt="thumbnail-music" className="lpb-card-img" />
+              <div className="lpb-music-ty">
+                <p className="lpb-title-music">
+                  { (music.title.length > 13)? `${music.title.substring(0, 12)}...` : music.title  }
+                </p>
+                <p>{ music.year }</p>
+              </div>
+              <p>
+                { (music.artist.name.length > 30)? `${music.artist.name.substring(0, 12)}...` : music.artist.name }
+              </p>
+            </div>
+          ))
+        }
       </section>
-    </div>
+    </main>
   )
 }
 
