@@ -31,16 +31,25 @@ body {
   box-shadow: 0 1px 10px rgba(46, 37, 37, 0.8);
 }
 
-.lp-nav {
+.lp-nav,
+.pay-header {
   display: flex;
   justify-content: space-between;
   padding: 20px 40px;
   background-color: transparent;
 }
 
-.lp-icon > img {
+.lp-icon > img,
+.pay-header-left > img {
   margin: 0 10px;
   cursor: pointer;
+}
+
+.pay-header-right > img,
+.lp-btn-group > img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
 
 .lp-btn-login,
@@ -159,6 +168,7 @@ body {
 .form-group-modal input[type=password],
 .form-group-modal input[type=number],
 .form-group-modal select,
+.form-attached-image,
 .form-group-modal textarea {
   border: 2px solid #d2d2d2;
   background-color: rgba(210, 210, 210, 0.25);
@@ -191,6 +201,7 @@ body {
 .form-group-modal input[type=email]:focus,
 .form-group-modal input[type=password]:focus,
 .form-group-modal input[type=number]:focus,
+.form-group-payment input[type=number]:focus,
 .form-group-modal select:focus,
 .form-group-modal textarea:focus {
   outline: none;
@@ -235,6 +246,7 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   margin: 10px;
+  padding-bottom: 30px;
 }
 
 .lpb-card-music {
@@ -244,8 +256,13 @@ body {
   padding: 10px 15px;
   margin: 10px;
   background-color: var(--card-color);
+  cursor: pointer;
   box-shadow: 0 2px 5px rgba(100, 100, 100, 0.8),
               0 -2px 5px rgba(100, 100, 100, 0.8);
+}
+
+.lpb-card-music:active {
+  opacity: 0.5;
 }
 
 .lpb-card-img {
@@ -271,6 +288,118 @@ body {
 .lpb-title-music {
   font-weight: 700;
   font-size: 18px;
+}
+
+/* payment body */
+.pay-wrapper {
+  text-align: center;
+  margin: auto;
+  width: 50vmax;
+}
+
+.pay-title {
+  font-weight: 800;
+  font-size: 36px;
+  color: inherit;
+  margin: 20px 0;
+}
+
+.pay-description {
+  font-size: 18px;
+  color: #03fcfc;
+}
+
+.DUMB,
+.SOUND {
+  font-weight: 900;
+}
+
+.DUMB {
+  color: var(--color-red);
+}
+
+.SOUND {
+  color: var(--text-white);
+}
+
+.form-payment {
+  margin-top: 30px;
+}
+
+.form-payment > * {
+  margin: 20px 0;
+}
+
+.form-group-payment input[type=number],
+.form-group-payment button[type=submit] {
+  width: 50%;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.form-group-payment input[type=number] {
+  border: 2px solid #d2d2d2;
+  background-color: rgba(210, 210, 210, 0.25);
+}
+
+.form-group-payment button[type=submit] {
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  background-color: var(--color-red);
+  font-weight: 800;
+}
+
+.form-group-payment button[type=submit]:active {
+  opacity: 0.5;
+}
+
+.form-image-preview {
+  width: 50%;
+}
+
+.form-group-payment input[type=file] {
+  display: none;
+  width: 50%;
+  cursor: pointer;
+}
+
+.form-attached-image {
+  width: 50%;
+  margin: auto;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  background-color: var(--DOM-color);
+  position: relative;
+}
+
+.form-group-payment label {
+  color: var(--color-red);
+  font-weight: 800;
+  cursor: pointer;
+  margin: 0;
+  left: -10%;
+  position: relative;
+}
+
+.form-clip-icon {
+  position: absolute;
+  top: -2px;
+  font-size: 24px;
+  right: -50%;
+  transform: rotate(-135deg) scaleX(-1);
+  color: var(--color-red);
+}
+
+.error-message {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  margin: auto;
+  border-radius: 10px;
+  background-color: #485954;
 }
 
 @media screen and (max-width: 1200px) {

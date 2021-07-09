@@ -1,10 +1,14 @@
 import React from 'react'
 
+import HeaderLanding from '../components/HeaderLanding'
+import HomeContent from '../components/HomeContent'
+
 const HomePage = () => {
 	return (
-		<View>
-			<Text></Text>
-		</View>
+		<>
+			<HeaderLanding />
+			<HomeContent />
+		</>
 	)
 }
 

@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { server } from '../config/axios'
-import LoginModal from './LoginModal'
-import RegisterModal from './RegisterModal'
+import { UserContext } from '../context/UserContext'
 
 import thumbnails from '../image/music-thumbnail.png'
 
-const LandingPageContent = () => {
+const HomeContent = () => {
   const thumbnail = 'http://localhost:5000/public/thumbnail/'
-  const [visibleLoginModal, setVisibleLoginModal] = useState(false)
-  const [visibleRegisterModal, setVisibleRegisterModal] = useState(false)
+  const [state] = useContext(UserContext)
   const [isLoading, setLoading] = useState('')
   const [musics, setMusics] = useState()
 
@@ -22,7 +20,6 @@ const LandingPageContent = () => {
     try {
       setLoading('loading data...')
       const res = await server.get('/musics')
-      console.log(res?.data.musics)
       setMusics(res?.data.musics)
     } catch (error) {
       console.log(error?.response)
@@ -31,25 +28,14 @@ const LandingPageContent = () => {
     }
   }
 
-  const onClickLogin = () => setVisibleLoginModal(!visibleLoginModal)
-
   return (
     <main className="lp-body">
       <p className="lpb-title">Dengarkan dan Rasakan</p>
-      <LoginModal
-        visibleLoginModal={ visibleLoginModal }
-        setVisibleLoginModal={ setVisibleLoginModal }
-        setVisibleRegisterModal={ setVisibleRegisterModal }
-      />
-      <RegisterModal
-        visibleRegisterModal={ visibleRegisterModal }
-        setVisibleRegisterModal={ setVisibleRegisterModal }
-        setVisibleLoginModal={ setVisibleLoginModal }
-      />
+      
       <section className="lpb-wrapper-music">
         { isLoading && <h1 style={{ fontSize: 24, color: '#fff' }}>{ isLoading }</h1> }
         { musics?.map((music, i) => (
-            <div className="lpb-card-music" key={ i } onClick={ onClickLogin }>
+            <div className="lpb-card-music" key={ i }>
               <img src={ thumbnail + music.thumbnail} alt="thumbnail-music" className="lpb-card-img" />
               <div className="lpb-music-ty">
                 <p className="lpb-title-music">
@@ -68,4 +54,4 @@ const LandingPageContent = () => {
   )
 }
 
-export default LandingPageContent
+export default HomeContent

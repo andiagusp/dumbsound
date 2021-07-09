@@ -1,12 +1,12 @@
 import React from 'react'
 
-import Header from '../components/Header'
+import HeaderLanding from '../components/HeaderLanding'
 import LandingPageContent from '../components/LandingPageContent'
 
 const Home = () => {
   return (
     <div>
-      <Header />
+      <HeaderLanding />
       <LandingPageContent />
     </div>
   )
