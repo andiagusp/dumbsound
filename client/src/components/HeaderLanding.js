@@ -36,14 +36,14 @@ const HeaderLanding = () => {
           setVisibleLoginModal={ setVisibleLoginModal }
         />
         {
-          (state.isLogin) ? 
+          (state.isLogin) ?
           <section className="lp-btn-group">
             <img src={ ProfileImage } alt="profile-pic" onClick={ () => history.push('/logout') }/>
           </section>
           :
           <section className="lp-btn-group">
             <button type="button" className="lp-btn-login" onClick={ onClickLogin }>Login</button>
-            <button type="button" className="lp-btn-register" onClick={ onClickRegister }>Register</button> 
+            <button type="button" className="lp-btn-register" onClick={ onClickRegister }>Register</button>
           </section>
         }
       </nav>

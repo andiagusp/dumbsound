@@ -8,7 +8,6 @@ const LoginModal = ({ visibleLoginModal, setVisibleLoginModal, setVisibleRegiste
   const [input, setInput] = useState({ email: '', password: '' })
   const [isLoading, setLoading] = useState('')
   const [error, setError] = useState('')
-  console.log(state);
 
   const onHideLogin = () => setVisibleLoginModal(!visibleLoginModal)
   const onChangeInput = (e) => {
