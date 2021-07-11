@@ -94,7 +94,8 @@ body {
 }
 
 /* modal */
-.lp-modal {
+.lp-modal,
+.t-modal-attache {
   position: fixed;
   background-color: var(--modal-overlay);
   top: 0;
@@ -124,6 +125,49 @@ body {
   width: 420px;
   background-color: var(--DOM-color);
   z-index: 3;
+}
+
+.t-modal-transaction {
+  position: fixed;
+  padding: 20px;
+  width: 50vmax;
+  height: 50vh;
+  top: 20vh;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: var(--DOM-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(210, 210, 210, 0.5);
+}
+
+.t-modal-transaction img {
+  box-shadow: 0 1px 5px rgba(210, 210, 210, 0.5);
+  object-fit: cover;
+  max-width: 40vmax;
+  max-height: 40vmax;
+}
+
+.t-modal-transaction .t-close-button {
+  z-index: 4;
+  position: absolute;
+  font-size: 20px;
+  cursor: pointer;
+  top: 0;
+  right: 1em;
+  transition: .8s ease all;
+}
+
+.t-close-button:hover {
+  transform: rotate(360deg);
+}
+
+.t-close-button:active {
+  opacity: .5;
 }
 
 .lp-modal-content-login {
@@ -435,6 +479,59 @@ body {
 .mp-close-button:hover .mp-close-text {
   transform: rotate(360deg);
   color: #000;
+}
+
+/* transaction */
+.transaction {
+  padding: 20px 100px;
+}
+
+.t-title {
+  font-weight: 700;
+  margin-bottom: 1em;
+  color: var(--text-white);
+}
+
+.t-table-wrapper {
+  background-color: white;
+}
+
+.table th {
+  border-top: none;
+}
+
+.t-table-wrapper thead tr {
+  color: var(--color-red);
+  font-size: 14px;
+  background-color: rgba(43, 43, 43, 1.0);
+}
+.t-table-wrapper tbody tr:nth-child(even) {
+  font-size: 14px;
+  color: var(--text-white);
+  background-color: rgba(43, 43, 43, 1.0);
+}
+
+.t-table-wrapper tbody tr:nth-child(odd) {
+  font-size: 14px;
+  color: var(--text-white);
+ background-color: rgba(58, 58, 58, 1.0);
+}
+
+.t-attache-name:hover {
+  cursor: pointer;
+  color: rgba(202, 237, 234, 0.8);
+}
+
+.t-attache-name:active {
+  opacity: .5;
+}
+/* modal drowpdown action */
+.t-table-dropdown {
+  text-align: center;
+}
+
+.t-da-menu {
+  background-color: rgba(58, 58, 58, 1.0);
 }
 
 @media screen and (max-width: 1200px) {

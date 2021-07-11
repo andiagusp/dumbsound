@@ -60,7 +60,7 @@ const HomeContent = () => {
       <section className="lpb-wrapper-music">
         { isLoading && <h1 style={{ fontSize: 24, color: '#fff' }}>{ isLoading }</h1> }
         { musics?.map((music, i) => (
-            <div className="lpb-card-music" key={ i } onClick={ () => onClickMusic(music.id) }>
+            <div className="lpb-card-music" key={ i } onClick={ () => onClickMusic(i) }>
               <img src={ thumbnail + music.thumbnail} alt="thumbnail-music" className="lpb-card-img" />
               <div className="lpb-music-ty">
                 <p className="lpb-title-music">
@@ -76,7 +76,7 @@ const HomeContent = () => {
         }
       </section>
       <section className="mp-music-player" >
-        <MusicPlayer 
+        <MusicPlayer
           visibleMusic={ visibleMusic }
           setVisibleMusic={ setVisibleMusic }
           audioLists={ srcMusic }

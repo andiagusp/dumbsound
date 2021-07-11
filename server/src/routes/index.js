@@ -3,7 +3,7 @@ const router = express.Router()
 
 const { register, login, userAuth } = require('../controllers/UserController')
 const { addArtist, destroyArtist } = require('../controllers/ArtisController')
-const { addTransaction, getAllTransaction } = require('../controllers/TransactionController')
+const { addTransaction, getAllTransaction, updateApproved } = require('../controllers/TransactionController')
 const { getAllMusic, addMusic } = require('../controllers/MusicController')
 
 const verifyToken = require('../middleware/auth')
@@ -17,7 +17,9 @@ router.post('/artist', verifyToken, addArtist)
 router.delete('/artist/:id', verifyToken, destroyArtist)
 
 router.get('/transactions', verifyToken, getAllTransaction)
+router.patch('/transaction/:id', verifyToken, updateApproved)
 router.post('/transaction', verifyToken, fileupload('imageFile'), addTransaction)
+
 
 router.get('/musics', getAllMusic)
 router.post('/music', verifyToken, fileupload('imageFile', 'audioFile'), addMusic)
