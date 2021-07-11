@@ -9,12 +9,12 @@ const Header = () => {
   const history = useHistory()
 
   return (
-    <header className="pay-header">
-      <section className="pay-header-left" onClick={ () => history.push('/') }>
+    <header className="header">
+      <section className="header-left" onClick={ () => history.push('/') }>
         <img src={ LogoShapes } alt="header-pict" />
         <img src={ Dumbsound } alt="header-pict" />
       </section>
-      <section className="pay-header-right">
+      <section className="header-right">
         <img src={ ProfileImage } alt="profile-pic" onClick={ () => history.push('/logout') }/>
       </section>
     </header>

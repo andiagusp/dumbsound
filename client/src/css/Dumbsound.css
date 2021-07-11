@@ -28,24 +28,29 @@ body {
   background: url(../image/landing-cover.png);
   background-repeat: no-repeat;
   background-size: cover;
-  box-shadow: 0 1px 10px rgba(46, 37, 37, 0.8);
+  box-shadow: 0 5px 5px rgba(10, 10, 10, 0.25);
 }
 
 .lp-nav,
-.pay-header {
+.header {
   display: flex;
   justify-content: space-between;
   padding: 20px 40px;
   background-color: transparent;
 }
 
+.header {
+  background-color: rgba(31, 31, 31, 1);
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
+}
+
 .lp-icon > img,
-.pay-header-left > img {
+.header-left > img {
   margin: 0 10px;
   cursor: pointer;
 }
 
-.pay-header-right > img,
+.header-right > img,
 .lp-btn-group > img {
   border-radius: 50%;
   width: 50px;
@@ -187,11 +192,14 @@ body {
 }
 
 .form-group-modal input[type=text],
+.form-group-artist input[type=text],
 .form-group-modal input[type=email],
 .form-group-modal input[type=password],
 .form-group-modal input[type=number],
+.form-group-artist input[type=number],
 .form-group-modal button[type=submit],
 .form-group-modal select,
+.form-group-artist select,
 .form-group-modal textarea {
   width: 100%;
   border-radius: 5px;
@@ -208,10 +216,13 @@ body {
 }
 
 .form-group-modal input[type=text],
+.form-group-artist input[type=text],
 .form-group-modal input[type=email],
 .form-group-modal input[type=password],
+.form-group-artist input[type=number],
 .form-group-modal input[type=number],
 .form-group-modal select,
+.form-group-artist select,
 .form-attached-image,
 .form-group-modal textarea {
   border: 2px solid #d2d2d2;
@@ -219,10 +230,10 @@ body {
   margin-bottom: 20px;
 }
 
-.form-group-modal select > option {
+.form-group-modal select > option,
+.form-group-artist select > option {
   background-color: var(--card-color);
   border-radius: 10px;
-  padding-bottom: 10px;
 }
 
 .form-group-modal button[type=submit] {
@@ -242,16 +253,35 @@ body {
 }
 
 .form-group-modal input[type=text]:focus,
+.form-group-artist input[type=text]:focus,
 .form-group-modal input[type=email]:focus,
 .form-group-modal input[type=password]:focus,
 .form-group-modal input[type=number]:focus,
+.form-group-artist input[type=number],
 .form-group-payment input[type=number]:focus,
 .form-group-modal select:focus,
+.form-group-artist select:focus,
 .form-group-modal textarea:focus {
   outline: none;
 }
 
-.form-group-modal button[type=submit]:active {
+.form-submit-artist {
+  text-align: center;
+}
+
+.form-group-artist button[type=submit] {
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 800;
+  border: none;
+  padding: 10px;
+  width: 50vmin;
+  background-color: var(--color-red);
+  color: var(--text-white);
+}
+
+.form-group-modal button[type=submit]:active,
+.form-group-artist button[type=submit]:active {
   opacity: 0.5;
   background-color: #fff;
   color: var(--color-red);
@@ -438,12 +468,14 @@ body {
 }
 
 .error-message {
+  text-align: center;
   font-size: 18px;
   font-weight: 800;
   color: #fff;
-  margin: auto;
+  margin: 10px auto;
+  padding: 10px;
   border-radius: 10px;
-  background-color: #485954;
+  background-color: rgba(54, 56, 64, 1);
 }
 
 .mp-close-button {
@@ -486,7 +518,8 @@ body {
   padding: 20px 100px;
 }
 
-.t-title {
+.t-title,
+.a-title {
   font-weight: 700;
   margin-bottom: 1em;
   color: var(--text-white);
@@ -532,6 +565,12 @@ body {
 
 .t-da-menu {
   background-color: rgba(58, 58, 58, 1.0);
+}
+
+/* artists */
+.artists {
+  width: 80vmax;
+  margin: 30px auto;
 }
 
 @media screen and (max-width: 1200px) {

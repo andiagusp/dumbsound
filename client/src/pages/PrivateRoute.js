@@ -6,11 +6,13 @@ import HomePage from './HomePage'
 import Transaction from './Transaction'
 import Payment from './Payment'
 import Logout from './Logout'
+import Artists from './Artists'
 
 const PrivateRoute = () => {
   return (
     <div>
       <Switch>
+        <Route path="/artist" component={ Artists } />
         <Route path="/transaction" component={ Transaction } />
         <Route path="/payment" component={ Payment } />
         <Route path="/logout" component={ Logout } />
