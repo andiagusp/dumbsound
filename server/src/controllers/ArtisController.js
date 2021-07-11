@@ -57,4 +57,30 @@ const destroyArtist = async (req, res) => {
   }
 }
 
-module.exports = { addArtist, destroyArtist }
+const getArtists = async (req, res) => {
+  try {
+    const results = await ArtistModel.getAllArtists()
+    res.status(200).send({
+      status: 'success',
+      artists: results
+    })
+  } catch (error) {
+    if (error instanceof ClientError) {
+      console.log(error)
+      const response = res.status(error.statusCode).send({
+        status: 'failed',
+        message: error.message
+      })
+      return response
+    }
+
+    const response = res.status(500).send({
+      status: 'failed',
+      message: error.message
+    })
+    console.log(error)
+    return response
+  }
+}
+
+module.exports = { addArtist, destroyArtist, getArtists }

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const { register, login, userAuth } = require('../controllers/UserController')
-const { addArtist, destroyArtist } = require('../controllers/ArtisController')
+const { addArtist, destroyArtist, getArtists } = require('../controllers/ArtisController')
 const { addTransaction, getAllTransaction, updateApproved } = require('../controllers/TransactionController')
 const { getAllMusic, addMusic } = require('../controllers/MusicController')
 
@@ -13,6 +13,7 @@ router.post('/login', login)
 router.post('/register', register)
 router.get('/authorization', verifyToken, userAuth)
 
+router.get('/artists', verifyToken, getArtists)
 router.post('/artist', verifyToken, addArtist)
 router.delete('/artist/:id', verifyToken, destroyArtist)
 

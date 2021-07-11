@@ -53,9 +53,7 @@ const PaymentContent = () => {
       setError(error.message)
     } finally {
       setInput({ rec: '', attache: '' })
-      setTimeout(() => {
-        setError('')
-      }, 5000)
+      setTimeout(() => setError(''), 5000)
       setSend('')
       setPreview(null)
     }

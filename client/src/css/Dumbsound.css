@@ -12,6 +12,7 @@
   --card-color: #3a3a3a;
   --color-red: #ee4622;
   --text-white: #fff;
+  --button-add: rgba(245, 128, 51, 1);
 }
 
 body {
@@ -193,12 +194,15 @@ body {
 
 .form-group-modal input[type=text],
 .form-group-artist input[type=text],
+.form-group-music input[type=text],
 .form-group-modal input[type=email],
 .form-group-modal input[type=password],
 .form-group-modal input[type=number],
+.form-group-music input[type=number],
 .form-group-artist input[type=number],
 .form-group-modal button[type=submit],
 .form-group-modal select,
+.form-group-music select,
 .form-group-artist select,
 .form-group-modal textarea {
   width: 100%;
@@ -217,11 +221,14 @@ body {
 
 .form-group-modal input[type=text],
 .form-group-artist input[type=text],
+.form-group-music input[type=text],
+.form-group-music input[type=number],
 .form-group-modal input[type=email],
 .form-group-modal input[type=password],
 .form-group-artist input[type=number],
 .form-group-modal input[type=number],
 .form-group-modal select,
+.form-group-music select,
 .form-group-artist select,
 .form-attached-image,
 .form-group-modal textarea {
@@ -231,6 +238,7 @@ body {
 }
 
 .form-group-modal select > option,
+.form-group-music select > option,
 .form-group-artist select > option {
   background-color: var(--card-color);
   border-radius: 10px;
@@ -254,34 +262,131 @@ body {
 
 .form-group-modal input[type=text]:focus,
 .form-group-artist input[type=text]:focus,
+.form-group-music input[type=text]:focus,
 .form-group-modal input[type=email]:focus,
 .form-group-modal input[type=password]:focus,
 .form-group-modal input[type=number]:focus,
-.form-group-artist input[type=number],
+.form-group-music input[type=number]:focus,
+.form-group-artist input[type=number]:focus,
 .form-group-payment input[type=number]:focus,
 .form-group-modal select:focus,
+.form-group-music select:focus,
 .form-group-artist select:focus,
 .form-group-modal textarea:focus {
   outline: none;
 }
 
-.form-submit-artist {
+.form-music-append {
+  display: flex;
+}
+
+.form-append-text {
+  width: 75%;
+}
+
+.form-append-file {
+  height: 50px;
+  border-radius: 5px;
+  border: 2px solid #d2d2d2;
+  margin-left: 5px;
+  position: relative;
+  width: 25%;
+  background-color: rgba(210, 210, 210, 0.25);
+}
+
+.form-clip-music-icon {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  cursor: pointer;
+  font-size: 30px;
+  color: var(--color-red);
+  transform: rotate(45deg) scaleY(-1);
+}
+
+.form-append-file p {
+  font-size: 18px;
+  position:  absolute;
+  top: 10px;
+  left: 3px;
+  color: rgba(255, 255, 255, .25);
+}
+
+.form-append-file input[type=file] {
+  display: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.form-group-music-attache {
+  position: relative;
+  width: 10vmax;
+  background-color: rgba(210, 210, 210, .25);
+  border-radius: 5px;
+  border: 2px solid #d2d2d2;
+  padding: 10px;
+}
+
+.form-preview-thumbnail,
+.form-preview-attache-music {
+  position: relative;
+}
+
+.audio-name {
+  width: 50vmax;
+  position: absolute;
+  font-size: 24px;
+  color: #fff;
+  left: 10em;
+}
+
+.form-preview-thumbnail img {
+  width: 50vmin;
+}
+
+.img-preview-thumbnail {
+  position: absolute;
+  top: -3em;
+  right: 0;
+  box-shadow: 0 5px 5px rgba(10, 10, 10, .5);
+}
+
+.form-group-music-attache p {
+  position: absolute;
+  font-size: 14px;
+  top: 8px;
+  color: rgba(255, 255, 255, .25);
+}
+
+.form-group-music-attache input[type=file]{
+  display: none;
+}
+
+.form-submit-artist,
+.form-submit-music {
   text-align: center;
 }
 
-.form-group-artist button[type=submit] {
+.form-group-music button[type=submit] {
+  margin-top: 20px;
+}
+
+
+.form-group-artist button[type=submit],
+.form-group-music button[type=submit] {
   border-radius: 5px;
   font-size: 18px;
   font-weight: 800;
   border: none;
   padding: 10px;
   width: 50vmin;
-  background-color: var(--color-red);
+  background-color: var(--button-add);
   color: var(--text-white);
 }
 
 .form-group-modal button[type=submit]:active,
-.form-group-artist button[type=submit]:active {
+.form-group-artist button[type=submit]:active,
+.form-group-music button[type=submit]:active {
   opacity: 0.5;
   background-color: #fff;
   color: var(--color-red);
@@ -519,6 +624,7 @@ body {
 }
 
 .t-title,
+.m-title,
 .a-title {
   font-weight: 700;
   margin-bottom: 1em;
@@ -568,10 +674,12 @@ body {
 }
 
 /* artists */
-.artists {
+.artists, .music {
   width: 80vmax;
   margin: 30px auto;
 }
+
+/* music */
 
 @media screen and (max-width: 1200px) {
 }

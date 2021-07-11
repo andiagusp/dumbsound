@@ -18,6 +18,10 @@ const ArtistModel = {
     console.log(data)
     if (!data) throw new NotFoundError('artist not found')
     await artist.destroy({ where: { id: id } })
+  },
+  getAllArtists: async function () {
+    const results = await artist.findAll({ attributes: ['id', 'name']})
+    return results
   }
 }
 

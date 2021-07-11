@@ -64,7 +64,7 @@ const HomeContent = () => {
               <img src={ thumbnail + music.thumbnail} alt="thumbnail-music" className="lpb-card-img" />
               <div className="lpb-music-ty">
                 <p className="lpb-title-music">
-                  { (music.title.length > 13)? `${music.title.substring(0, 12)}...` : music.title  }
+                  { (music.title.length > 12)? `${music.title.substring(0, 12)}...` : music.title  }
                 </p>
                 <p>{ music.year }</p>
               </div>
