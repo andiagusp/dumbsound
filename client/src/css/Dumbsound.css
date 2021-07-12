@@ -51,6 +51,10 @@ body {
   cursor: pointer;
 }
 
+.lp-button-group {
+  position: relative;
+}
+
 .header-right > img,
 .lp-btn-group > img {
   border-radius: 50%;
@@ -190,6 +194,7 @@ body {
   font-weight: 800;
   font-size: 36px;
   color: #fff;
+  margin-bottom: 1em;
 }
 
 .form-group-modal input[type=text],
@@ -488,6 +493,26 @@ body {
   color: #03fcfc;
 }
 
+.pay-done-subscribe {
+  font-size: 10em;
+  color: rgba(0, 242, 77, 1.0);
+}
+
+.pay-message-subscribe {
+  font-size: 3em;
+}
+
+.pay-back-home {
+  font-size: 2em;
+  text-decoration: underline;
+}
+
+
+.pay-back-home:hover {
+  opacity: .5;
+  cursor: pointer;
+}
+
 .DUMB,
 .SOUND {
   font-weight: 900;
@@ -669,6 +694,10 @@ body {
   text-align: center;
 }
 
+.t-table-dai {
+  cursor: pointer;
+}
+
 .t-da-menu {
   background-color: rgba(58, 58, 58, 1.0);
 }
@@ -679,7 +708,84 @@ body {
   margin: 30px auto;
 }
 
-/* music */
+/* dropdown header */
+.dropdownheader {
+  position: relative;
+  z-index: 5;
+  font-size: 18px;
+  font-weight: 800;
+  border-radius: 5px;
+  position: absolute;
+  background-color: var(--card-color);
+  width: 220px;
+  top: 6em;
+  right: 2em;
+  box-shadow: 2px 2px 5px rgba(10, 10, 10, .5),
+              -2px -2px 5px rgba(10, 10, 10, .5);
+}
+
+.dropdownheader:before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -1em;
+  right: .5em;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 30px solid var(--card-color);
+}
+
+.dd-route, .dd-logout {
+  cursor: pointer;
+  margin: 20px;
+}
+
+.dd-route > * {
+  margin: 10px 0;
+}
+
+
+.dd-route-group:hover img,
+.dd-route-group:hover span {
+  opacity: .5;
+}
+
+.dd-divider {
+  border-bottom: 2px solid rgba(255, 255, 255, .5);
+}
+
+.dd-icon {
+  font-size: 24px;
+  margin-right: .5em;
+  font-weight: 800;
+  color: var(--color-red);
+}
+
+.dd-logout:hover img,
+.dd-logout:hover span {
+  opacity: .5;
+}
+
+/* overide audio player */
+
+.progress-bar {
+  background-color: transparent;
+}
+
+.react-jinke-music-player-main .music-player-panel .panel-content .rc-slider-handle,
+.react-jinke-music-player-main .music-player-panel .panel-content .rc-slider-track {
+  background-color: var(--color-red);
+}
+
+/* overide dropdown ant */
+.ant-dropdown-placement-bottomCenter > .ant-dropdown-arrow,
+.ant-dropdown-placement-bottomLeft > .ant-dropdown-arrow,
+.ant-dropdown-placement-bottomRight > .ant-dropdown-arrow {
+  border-left-color: var(--card-color);
+  border-top-color: var(--card-color);
+}
 
 @media screen and (max-width: 1200px) {
 }

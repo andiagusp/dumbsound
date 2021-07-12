@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { PaperClipOutlined } from '@ant-design/icons'
+import { IoMdDoneAll } from 'react-icons/io'
 import { UserContext } from '../context/UserContext'
 import { server } from '../config/axios'
 
@@ -59,7 +60,7 @@ const PaymentContent = () => {
     }
   }
 
-  return (
+  return (state.user.subscribe === 'false') ? (
     <main className="pay-wrapper">
       <h1 className="pay-title">Premium</h1>
       <p className="pay-description">
@@ -82,6 +83,13 @@ const PaymentContent = () => {
           <button type="submit">{ send? send : 'Send' }</button>
         </div>
       </form>
+    </main>
+  ) : (
+    <main className="pay-wrapper">
+      <h1 className="pay-title">Premium</h1>
+      <p className="pay-done-subscribe"><IoMdDoneAll /></p>
+      <p className="pay-message-subscribe">Anda Sudah Berlangganan</p>
+      <p className="pay-back-home" onClick={ () => history.push('/') }>Back To Home</p>
     </main>
   )
 }

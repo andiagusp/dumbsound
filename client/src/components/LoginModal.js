@@ -30,11 +30,11 @@ const LoginModal = ({ visibleLoginModal, setVisibleLoginModal, setVisibleRegiste
 			})
       setInput({ email: '', password: '' })
     } catch (error) {
-      const e = error?.response.status
-      if (e === 401 || e === 400) {
+      if (error.hasOwnProperty('response')) {
         setError(error?.response.data.message)
+      } else {
+        console.log(error.message)
       }
-      console.log(error?.response)
     } finally {
       setTimeout(() => setError(''), 5000)
       setLoading('')
@@ -49,7 +49,7 @@ const LoginModal = ({ visibleLoginModal, setVisibleLoginModal, setVisibleRegiste
       <div className="overlay" onClick={ onHideLogin } />
       <section className="lp-modal-content-login">
         <h1 className="lp-modal-title">Login</h1>
-        { error && <p style={{ fontSize: 18 }}>{ error }</p> }
+        { error && <p className="error-message">{ error }</p> }
         <form onSubmit={ onSubmitLogin }>
           <div className="form-group-modal">
             <input type="email" placeholder="Email" name="email" value={ input.email } onChange={ onChangeInput } required="on" />

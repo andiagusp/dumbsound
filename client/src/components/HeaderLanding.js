@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 
+import DropdownHeader from './DropdownHeader'
 import { UserContext } from '../context/UserContext'
 import Dumbsound from '../image/dumbsound.png'
 import LogoShapes from '../image/logo-shapes.png'
@@ -10,17 +11,19 @@ import ProfileImage from '../image/profile-img.png'
 
 const HeaderLanding = () => {
   const history = useHistory()
+  const [show, setShow] = useState(false)
   const [state] = useContext(UserContext)
   const [visibleLoginModal, setVisibleLoginModal] = useState(false)
   const [visibleRegisterModal, setVisibleRegisterModal] = useState(false)
 
   const onClickLogin = () => setVisibleLoginModal(!visibleLoginModal)
   const onClickRegister = () => setVisibleRegisterModal(!visibleRegisterModal)
+  const onClickShow = () => setShow(!show)
 
   return (
     <header className="lp-header">
       <nav className="lp-nav">
-        <section className="lp-icon" onClick={ () => history.push('/')}>
+        <section className="lp-icon">
           <img src={ LogoShapes } alt="icon-side" />
           <img src={ Dumbsound } alt="icon-side" />
         </section>
@@ -38,7 +41,8 @@ const HeaderLanding = () => {
         {
           (state.isLogin) ?
           <section className="lp-btn-group">
-            <img src={ ProfileImage } alt="profile-pic" onClick={ () => history.push('/logout') }/>
+            <img src={ ProfileImage } alt="profile-pic" onClick={ onClickShow }/>
+            <DropdownHeader show={ show } setShow={ setShow } context={ state } />
           </section>
           :
           <section className="lp-btn-group">

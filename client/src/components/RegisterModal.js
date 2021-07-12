@@ -38,11 +38,11 @@ const RegisterModal = ({ visibleRegisterModal, setVisibleRegisterModal, setVisib
 			const res = await server.post('/register', body, headers)
 			saveContext(res)
 		} catch (error) {
-			const e = error?.response.status
-      if (e === 401 || e === 400) {
+			if (error.hasOwnProperty('response')) {
         setError(error?.response.data.message)
+      } else {
+        console.log(error.message)
       }
-      console.log(error?.response)
 		} finally {
 			setTimeout(() => setError(''), 5000)
 			setSend('')

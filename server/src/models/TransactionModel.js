@@ -10,7 +10,7 @@ const TransactionModel = {
       include: {
         model: user,
         as: 'user',
-        attributes: { exclude: ['updatedAt', 'createdAt', 'password', 'listAs'] }
+        attributes: { exclude: ['updatedAt', 'createdAt', 'password'] }
       }
     })
     if (!result) throw new NotFoundError('payment history not found')
@@ -30,7 +30,7 @@ const TransactionModel = {
       include: {
         model: user,
         as: 'user',
-        attributes: { exclude: ['updatedAt', 'createdAt', 'password', 'listAs'] }
+        attributes: { exclude: ['updatedAt', 'createdAt', 'password'] }
       }
     })
     const mapResult = results.map((result) => ({

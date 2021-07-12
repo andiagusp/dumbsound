@@ -73,21 +73,23 @@ const TransactionContent = () => {
 		    	<tr>
 		    		<td colSpan={ 7 }><p style={{ textAlign: 'center', fontSize: 20 }}>{ loading }</p></td>
 		    	</tr> }
-		    { listTransactions?.map((lt, i) => (
-		    		<tr key={ i }>
-			        <td>{ ++i }</td>
-			        <td>{ lt.user.fullName }</td>
-			        <td className="t-attache-name" onClick={ () => onClickAttache(lt) }>{ lt.attache }</td>
-			        <td>{ `${diffDay(lt.dueDate)} / day`  }</td>
-			        <td style={{ color: colors[(lt.status === 'approved')? 'active' : 'Not active'] }}>{ (lt.status === 'approved')? 'active' : 'Not active' }</td>
-			        <td style={{ color: colors[lt.status] }}>{ lt.status }</td>
-			        <td className="t-table-dropdown">
-			        	<Dropdown overlay={ <DropdownAction getTransaction={ getTransaction } transaction={ lt } key={ i } /> } placement="bottomLeft" arrow trigger="click">
-						    	<img src={ triangle } alt="triangle-pict" className="t-table-dai" />
-						    </Dropdown>
-			        </td>
-			      </tr>
-		    	))
+		    { listTransactions?.map((lt, i) => {
+		    		return (lt.user.listAs === '0') && (
+			    		<tr key={ i }>
+				        <td>{ ++i }</td>
+				        <td>{ lt.user.fullName }</td>
+				        <td className="t-attache-name" onClick={ () => onClickAttache(lt) }>{ lt.attache }</td>
+				        <td>{ `${diffDay(lt.dueDate)} / day`  }</td>
+				        <td style={{ color: colors[(lt.status === 'approved')? 'active' : 'Not active'] }}>{ (lt.status === 'approved')? 'active' : 'Not active' }</td>
+				        <td style={{ color: colors[lt.status] }}>{ lt.status }</td>
+				        <td className="t-table-dropdown">
+				        	<Dropdown overlay={ <DropdownAction getTransaction={ getTransaction } transaction={ lt } key={ i } /> } placement="bottomLeft" arrow trigger="click">
+							    	<img src={ triangle } alt="triangle-pict" className="t-table-dai" />
+							    </Dropdown>
+				        </td>
+				      </tr>
+				    )
+		    	})
 		  	}
 		    </tbody>
 			</Table>
