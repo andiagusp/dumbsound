@@ -48,15 +48,19 @@ const PaymentContent = () => {
       setSend('sending data...')
       const form = generateData()
       const res = await server.post('/transaction', form)
-      if (res?.data.status === 'success') setError('Data send complete')
-      history.go(0)
+      if (res?.data.status === 'success') setError('Data send complete wait a few moments for payment confirmation')
+      setTimeout(() => history.go(0), 3000)
     } catch (error) {
-      setError(error.message)
+      if (error.hasOwnProperty('response')) {
+        setError(error.response.data.message)
+      } else {
+        setError(error.message)
+      }
     } finally {
       setInput({ rec: '', attache: '' })
       setTimeout(() => setError(''), 5000)
       setSend('')
-      setPreview(null)
+      setPreview()
     }
   }
 

@@ -60,6 +60,7 @@ body {
   border-radius: 50%;
   width: 50px;
   height: 50px;
+  cursor: pointer;
 }
 
 .lp-btn-login,
@@ -415,7 +416,7 @@ body {
 
 /* landing body */
 .lp-body {
-  margin: 40px;
+  margin: 40px 20px;
 }
 
 .lpb-title {
@@ -423,6 +424,24 @@ body {
   font-weight: 700;
   text-align: center;
   font-size: 24px;
+}
+
+.lpb-alert-subscribe {
+  color: var(--text-white);
+  text-align: center;
+  font-size: 20px;
+}
+
+.lpb-alert-subscribe span {
+  cursor: pointer;
+  font-size: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, .5);
+}
+
+.lpb-alert-subscribe span:hover {
+  opacity: .7;
+  text-decoration: underline;
 }
 
 .lpb-wrapper-music {
@@ -479,6 +498,7 @@ body {
   text-align: center;
   margin: auto;
   width: 50vmax;
+  padding-bottom: 30px;
 }
 
 .pay-title {
@@ -768,15 +788,19 @@ body {
   opacity: .5;
 }
 
+.profile-picture {
+  border: 2px solid var(--text-white);
+}
+
 /* overide audio player */
 
 .progress-bar {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .react-jinke-music-player-main .music-player-panel .panel-content .rc-slider-handle,
 .react-jinke-music-player-main .music-player-panel .panel-content .rc-slider-track {
-  background-color: var(--color-red);
+  background-color: var(--color-red) !important;
 }
 
 /* overide dropdown ant */

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import Dumbsound from '../image/dumbsound.png'
 import LogoShapes from '../image/logo-shapes.png'
-import ProfileImage from '../image/profile-img.png'
+import ProfileImage from '../image/unknow.jpeg'
 import DropdownHeader from './DropdownHeader'
 
 const Header = () => {
@@ -21,7 +21,7 @@ const Header = () => {
         <img src={ Dumbsound } alt="header-pict" />
       </section>
       <section className="header-right">
-        <img src={ ProfileImage } onClick={ onClickShow } alt="profile-pic" />
+        <img src={ ProfileImage } className="profile-picture" onClick={ onClickShow } alt="profile-pic" />
         <DropdownHeader show={ show } setShow={ setShow } context={ state } />
       </section>
     </header>

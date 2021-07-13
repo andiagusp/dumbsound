@@ -7,7 +7,7 @@ import Dumbsound from '../image/dumbsound.png'
 import LogoShapes from '../image/logo-shapes.png'
 import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
-import ProfileImage from '../image/profile-img.png'
+import ProfileImage from '../image/unknow.jpeg'
 
 const HeaderLanding = () => {
   const history = useHistory()
@@ -41,7 +41,7 @@ const HeaderLanding = () => {
         {
           (state.isLogin) ?
           <section className="lp-btn-group">
-            <img src={ ProfileImage } alt="profile-pic" onClick={ onClickShow }/>
+            <img src={ ProfileImage } className="profile-picture" alt="profile-pic" onClick={ onClickShow }/>
             <DropdownHeader show={ show } setShow={ setShow } context={ state } />
           </section>
           :
