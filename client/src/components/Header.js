@@ -11,7 +11,7 @@ const Header = () => {
   const history = useHistory()
   const [show, setShow] = useState(false)
   const [state] = useContext(UserContext)
-
+  console.log(state)
   const onClickShow = () => setShow(!show)
 
   return (
@@ -21,6 +21,7 @@ const Header = () => {
         <img src={ Dumbsound } alt="header-pict" />
       </section>
       <section className="header-right">
+        <span className="lp-username">{ state.user.fullName }</span>
         <img src={ ProfileImage } className="profile-picture" onClick={ onClickShow } alt="profile-pic" />
         <DropdownHeader show={ show } setShow={ setShow } context={ state } />
       </section>

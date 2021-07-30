@@ -4,16 +4,17 @@ import { useHistory } from 'react-router-dom'
 import { server } from '../config/axios'
 import { UserContext } from '../context/UserContext'
 import MusicPlayer from './MusicPlayer'
+import Loading from './Loading'
 
 import thumbnails from '../image/music-thumbnail.png'
 
 const HomeContent = () => {
-  const pathAudio = 'http://localhost:5000/public/audio/'
-  const pathCover = 'http://localhost:5000/public/thumbnail/'
-  const thumbnail = 'http://localhost:5000/public/thumbnail/'
+  const pathAudio = 'http://192.168.1.12:5000/public/audio/'
+  const pathCover = 'http://192.168.1.12:5000/public/thumbnail/'
+  const thumbnail = 'http://192.168.1.12:5000/public/thumbnail/'
   const history = useHistory()
   const [state] = useContext(UserContext)
-  const [isLoading, setLoading] = useState('')
+  const [isLoading, setLoading] = useState(false)
   const [musics, setMusics] = useState()
   const [musicsUnsub, setMusicsUnsub] = useState()
   const [srcMusic, setSrcMusic] = useState()
@@ -39,7 +40,7 @@ const HomeContent = () => {
 
   const getMusics = async () => {
     try {
-      setLoading('loading data...')
+      setLoading(true)
       const res = await server.get('/musics')
       const filters = res?.data.musics.filter((m, i) => i < 3)
       setMusics(res?.data.musics)
@@ -63,7 +64,7 @@ const HomeContent = () => {
     } catch (error) {
       console.log(error)
     } finally {
-      setLoading('')
+      setLoading(false)
     }
   }
 
@@ -77,7 +78,7 @@ const HomeContent = () => {
         </section> 
       }
       <section className="lpb-wrapper-music">
-        { isLoading && <h1 style={{ fontSize: 24, color: '#fff' }}>{ isLoading }</h1> }
+        { isLoading && <Loading type="spin" color="#eaeaea" /> }
         {
           (state.user.subscribe === 'true') ? 
             musics?.map((music, i) => (

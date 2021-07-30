@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react'
 
-import { server, setTokenHeaders } from '../config/axios'
 import { UserContext } from '../context/UserContext'
+import { server, setTokenHeaders } from '../config/axios'
+
+import Loading from './Loading'
 
 const RegisterModal = ({ visibleRegisterModal, setVisibleRegisterModal, setVisibleLoginModal }) => {
 	const [state, dispatch] = useContext(UserContext)
-	const [send, setSend] = useState('')
+	const [send, setSend] = useState(false)
 	const [error, setError] = useState('')
 	
 	const onHideRegister = () => setVisibleRegisterModal(!visibleRegisterModal)
@@ -32,31 +34,34 @@ const RegisterModal = ({ visibleRegisterModal, setVisibleRegisterModal, setVisib
 	const onSubmitRegister = async (e) => {
 		e.preventDefault()
 		try {
-			setSend('sending data...')
+			setSend(true)
 			const headers = { headers: { 'Content-Type': 'application/json' } }
 			const body = JSON.stringify(register)
 			const res = await server.post('/register', body, headers)
+			console.log(res)
 			saveContext(res)
 		} catch (error) {
 			if (error.hasOwnProperty('response')) {
-        setError(error?.response.data.message)
+				console.log(error.response.data.message)
+        setError(error.response.data.message)
       } else {
         console.log(error.message)
       }
 		} finally {
 			setTimeout(() => setError(''), 5000)
-			setSend('')
+			setSend(false)
 		}
 	}
 
 	const saveContext = ({ status, data }) => {
+		console.log(status, data)
 		if (status === 201) {
 			dispatch({
 				type: 'login_success',
 				payload: data.user
 			})
-			localStorage.setItem('token', data.token)
-      setTokenHeaders(data.token)
+			localStorage.setItem('token', data.user.token)
+      setTokenHeaders(data.user.token)
 		}
 		setRegister({ fullName: '', email: '', password: '', gender: 'male', phone: '', address: '' })
 	}
@@ -66,7 +71,7 @@ const RegisterModal = ({ visibleRegisterModal, setVisibleRegisterModal, setVisib
 			<div className="overlay" onClick={ onHideRegister } />
 			<div className="lp-modal-content-register">
 				<h1 className="lp-modal-title">Register</h1>
-				{ error && <p style={{ fontSize: 20, color: '#fff' }}></p> }
+				{ error && <p className="error-message">{ error }</p> }
 				<form onSubmit={ onSubmitRegister }>
 					<div className="form-group-modal">
             <input type="email" placeholder="Email" name="email" value={ register.email } autoComplete="off" required="on" onChange={ onChangeRegister } />
@@ -90,7 +95,9 @@ const RegisterModal = ({ visibleRegisterModal, setVisibleRegisterModal, setVisib
             <textarea cols="10" placeholder="Address" name="address" value={ register.address } autoComplete="off" required="on" onChange={ onChangeRegister }></textarea>
           </div>
 					<div className="form-group-modal">
-            <button type="submit">{ send ? send : 'Register' }</button>
+            <button type="submit">
+            	{ send ? <span style={{ position: 'relative', left: '48%' }}><Loading  type="spin" color="#eaeaea" width={ 25 } height={ 25 } /></span> : 'Register' }
+            </button>
           </div>
 				</form>
 				<p className="lp-click-here">Already have an account ? Click <span onClick={ onClickLogin }>Here</span></p>

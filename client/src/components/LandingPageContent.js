@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { server } from '../config/axios'
 import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
+import Loading from './Loading'
 
 import thumbnails from '../image/music-thumbnail.png'
 
 const LandingPageContent = () => {
-  const thumbnail = 'http://localhost:5000/public/thumbnail/'
+  const thumbnail = 'http://192.168.1.12:5000/public/thumbnail/'
   const [visibleLoginModal, setVisibleLoginModal] = useState(false)
   const [visibleRegisterModal, setVisibleRegisterModal] = useState(false)
   const [isLoading, setLoading] = useState('')
@@ -47,7 +48,7 @@ const LandingPageContent = () => {
         setVisibleLoginModal={ setVisibleLoginModal }
       />
       <section className="lpb-wrapper-music">
-        { isLoading && <h1 style={{ fontSize: 24, color: '#fff' }}>{ isLoading }</h1> }
+        { isLoading && <Loading type="spin" color="#eaeaea" /> }
         { musics?.map((music, i) => (
             <div className="lpb-card-music" key={ i } onClick={ onClickLogin }>
               <img src={ thumbnail + music.thumbnail} alt="thumbnail-music" className="lpb-card-img" />

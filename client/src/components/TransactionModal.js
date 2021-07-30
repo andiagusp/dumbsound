@@ -1,7 +1,7 @@
 import React from 'react'
 
 const TransactionModal = ({ visibleTransaction, setVisibleTransaction, user }) => {
-  const pathImage = 'http://localhost:5000/public/image/'
+  const pathImage = 'http://192.168.1.12:5000/public/image/'
   const onClickTransaction = () => setVisibleTransaction(!visibleTransaction)
 
   return visibleTransaction && (

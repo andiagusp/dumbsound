@@ -6,13 +6,15 @@ import { IoMdDoneAll } from 'react-icons/io'
 import { UserContext } from '../context/UserContext'
 import { server } from '../config/axios'
 
+import Loading from './Loading'
+
 const PaymentContent = () => {
   const history = useHistory()
   const [state] = useContext(UserContext)
   const [input, setInput] = useState({ rec: '', attache: '' })
   const [preview, setPreview] = useState()
   const [error, setError] = useState('')
-  const [send, setSend] = useState('')
+  const [send, setSend] = useState(false)
 
   const onChangeInput = (e) => {
     setInput({
@@ -45,11 +47,11 @@ const PaymentContent = () => {
   const onSubmitPayment = async (e) => {
     e.preventDefault()
     try {
-      setSend('sending data...')
+      setSend(true)
       const form = generateData()
       const res = await server.post('/transaction', form)
       if (res?.data.status === 'success') setError('Data send complete wait a few moments for payment confirmation')
-      setTimeout(() => history.go(0), 3000)
+      setTimeout(() => history.push('/history-payment'), 3000)
     } catch (error) {
       if (error.hasOwnProperty('response')) {
         setError(error.response.data.message)
@@ -59,7 +61,7 @@ const PaymentContent = () => {
     } finally {
       setInput({ rec: '', attache: '' })
       setTimeout(() => setError(''), 5000)
-      setSend('')
+      setSend(false)
       setPreview()
     }
   }
@@ -84,7 +86,7 @@ const PaymentContent = () => {
         </div>
         { preview && <img src={ preview } className="form-image-preview" alt="preview-pict" /> }
         <div className="form-group-payment">
-          <button type="submit">{ send? send : 'Send' }</button>
+          <button type="submit">{ send? <span style={{ position: 'relative', left: '48%' }}><Loading  type="spin" color="#eaeaea" width={ 25 } height={ 25 } /></span> : 'Send' }</button>
         </div>
       </form>
     </main>
@@ -92,7 +94,7 @@ const PaymentContent = () => {
     <main className="pay-wrapper">
       <h1 className="pay-title">Premium</h1>
       <p className="pay-done-subscribe"><IoMdDoneAll /></p>
-      <p className="pay-message-subscribe">Anda Sudah Berlangganan</p>
+      <p className="pay-message-subscribe">You are already subscribed</p>
       <p className="pay-back-home" onClick={ () => history.push('/') }>Back To Home</p>
     </main>
   )

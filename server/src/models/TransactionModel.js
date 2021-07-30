@@ -1,3 +1,4 @@
+const { Op } = require('sequelize')
 const { transaction, user } = require('../../models')
 const NotFoundError = require('../exceptions/NotFoundError')
 
@@ -27,6 +28,7 @@ const TransactionModel = {
   getTransactions: async function () {
     const results = await transaction.findAll({
       attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] },
+      order: [['id', 'DESC']],
       include: {
         model: user,
         as: 'user',
@@ -72,6 +74,45 @@ const TransactionModel = {
       attache: result.attache,
       status: result.status
     })
+  },
+  searchDate: async function (data) {
+    const result = await transaction.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] },
+      where: {
+        [Op.or]: [
+          {
+            startDate: {
+              [Op.like]: `${data.date}%`
+            }
+          },
+          {
+            dueDate: {
+              [Op.like]: `${data.date}%`
+            }
+          }
+        ]
+      },
+      include: {
+        model: user,
+        as: 'user',
+        attributes: { exclude: ['updatedAt', 'createdAt', 'password'] }
+      }
+    })
+    return result
+  },
+  getPaymentHistoryUser: async function (id) {
+    const result = await transaction.findAll({
+      attributes: { exclude: ['createdAt', 'updatedAt', 'userId'] },
+      where: {
+        userId: id
+      },
+      include: {
+        model: user,
+        as: 'user',
+        attributes: { exclude: ['updatedAt', 'createdAt', 'password'] }
+      }
+    })
+    return result
   }
 }
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const server = axios.create({ baseURL: 'http://localhost:5000/api/v1'})
+const server = axios.create({ baseURL: 'http://192.168.1.12:5000/api/v1'})
 
 const setTokenHeaders = (token) => {
   if (token) {

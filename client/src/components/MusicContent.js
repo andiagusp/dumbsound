@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { PaperClipOutlined } from '@ant-design/icons'
 
-
 import { server } from '../config/axios'
+import Loading from './Loading'
 
 const MusicContent = props => {
 	const history = useHistory()
-	const [loading, setLoading] = useState('')
+	const [loading, setLoading] = useState(false)
 	const [audio, setAudio] = useState()
 	const [send, setSend] = useState('')
 	const [artists, setArtists] = useState()
@@ -65,7 +65,7 @@ const MusicContent = props => {
 
 	const onSubmitMusic = async (e) => {
 		try {
-			setLoading('sending data ...')
+			setLoading(true)
 			e.preventDefault()
 			const body = getDataInput()
 			const res = await server.post('/music', body)
@@ -81,9 +81,9 @@ const MusicContent = props => {
 			}
 		} finally {
 			setInput({ title: '', year: '', artistId: '', imageFile: '', audioFile: '' })
-			setLoading('')
-			setPreview('')
-			setAudio('')
+			setLoading(false)
+			setPreview()
+			setAudio()
 			setTimeout(() => {
 				setError('')
 				setSuccess('')
@@ -113,20 +113,23 @@ const MusicContent = props => {
 				<div className="form-group-music">
 					<select name="artistId" onChange={ onChangeInput } value={ input.artistId } >
 						{ loading && <option value="">{ loading }</option> }
+						<option value="">Select Artist</option>
 						{
 							artists?.map((a, i) => (<option value={ a.id } key={ i }>{ a.name }</option>))
 						}
 					</select>
 				</div>
 				<div className="form-group-music-attache  form-preview-attache-music">
-					<label htmlFor="attache">
-						<input type="file" name="audioFile" id="attache" onChange={ onChangeInput } placeholder="attache"  />
-						<p>Attache</p>
-					</label>
+					<button type="button">
+						<label htmlFor="attache">
+							<input type="file" name="audioFile" id="attache" onChange={ onChangeInput } placeholder="attache"  />
+							Attache
+						</label>
+					</button>
 					{ audio && <p className="audio-name" style={{ color: 'white' }}>{ audio }</p>}
 				</div>
 				<div className="form-group-music form-submit-music form-preview-thumbnail">
-					<button type="submit">{ loading ? loading : 'Add Song' }</button>
+					<button type="submit">{ loading ? <span style={{ position: 'relative', left: '48%' }}><Loading  type="spin" color="#eaeaea" width={ 25 } height={ 25 } /></span> : 'Add Song' }</button>
 					{ preview && <img src={ preview } className="img-preview-thumbnail" alt="preview" /> }
 				</div>
 			</form>

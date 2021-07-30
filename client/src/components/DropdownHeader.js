@@ -2,6 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { IoIosLogOut } from 'react-icons/io'
+import { BsListCheck } from 'react-icons/bs'
 
 import PayIcon from '../image/pay.png'
 import ArtistIcon from '../image/art-icon.png'
@@ -13,8 +14,14 @@ const DropdownHeader = ({ show, setShow, context: { user } }) => {
 		<div  className="dropdownheader">
 		{ (user.status === "0") &&
 			<section className="dd-route">
-				<img src={ PayIcon } alt="route-pict" className="dd-icon" onClick={ () => history.push('/payment') } />
-				<span onClick={ () => history.push('/payment') }>Pay</span>
+				<div className="dd-route-group">
+					<img src={ PayIcon } alt="route-pict" className="dd-icon" onClick={ () => history.push('/payment') } />
+					<span onClick={ () => history.push('/payment') }>Pay</span>
+				</div>
+				<div className="dd-route-group">
+					<BsListCheck className="dd-icon" onClick={ () => history.push('/history-payment') } />
+					<span onClick={ () => history.push('/history-payment') }>List Transaction</span>
+				</div>
 			</section>
 		}
 		{ (user.status === "1") &&

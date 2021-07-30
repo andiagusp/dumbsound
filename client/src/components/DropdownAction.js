@@ -3,14 +3,18 @@ import { Menu } from 'antd'
 
 import { server } from '../config/axios'
 
-const DropdownAction = ({ transaction, getTransaction }) => {
+const DropdownAction = ({ transaction, getTransaction , isSearch, onSubmitSearch }) => {
 	const [loading, setLoading] = useState()
 
 	const onClickApproved = async ({ id, status, user }) => {
 		try {
 			const res = await server.patch(`/transaction/${id}`, { status: status, user: user })
 			console.log(res)
-			getTransaction()
+			if (isSearch) {
+				onSubmitSearch()
+			} else {
+				getTransaction()
+			}
 		} catch (error) {
       console.log(error.response)
     } finally {

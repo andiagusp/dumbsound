@@ -8,4 +8,8 @@ const TransactionSchema = Joi.object({
   status: Joi.string().required()
 })
 
-module.exports = TransactionSchema
+const SearchDateTransactionSchema = Joi.object({
+  date: Joi.string().required()
+})
+
+module.exports = { TransactionSchema, SearchDateTransactionSchema }

@@ -3,10 +3,12 @@ import React, { useState, useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 import { server, setTokenHeaders } from '../config/axios'
 
+import Loading from './Loading'
+
 const LoginModal = ({ visibleLoginModal, setVisibleLoginModal, setVisibleRegisterModal }) => {
   const [state, dispatch] = useContext(UserContext)
   const [input, setInput] = useState({ email: '', password: '' })
-  const [isLoading, setLoading] = useState('')
+  const [isLoading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   const onHideLogin = () => setVisibleLoginModal(!visibleLoginModal)
@@ -19,7 +21,7 @@ const LoginModal = ({ visibleLoginModal, setVisibleLoginModal, setVisibleRegiste
   const onSubmitLogin = async (e) => {
     e.preventDefault()
     try {
-      setLoading('Wait ...')
+      setLoading(true)
       const res = await server.post('/login', input)
       const token = res.data.user.token
       localStorage.setItem('token', token)
@@ -37,7 +39,7 @@ const LoginModal = ({ visibleLoginModal, setVisibleLoginModal, setVisibleRegiste
       }
     } finally {
       setTimeout(() => setError(''), 5000)
-      setLoading('')
+      setLoading(false)
     }
   }
   const onClickRegister = () => {
@@ -58,7 +60,7 @@ const LoginModal = ({ visibleLoginModal, setVisibleLoginModal, setVisibleRegiste
             <input type="password" placeholder="Password" name="password" value={ input.password } onChange={ onChangeInput } required="on" />
           </div>
           <div className="form-group-modal">
-            <button type="submit">{ isLoading? isLoading : 'Login' }</button>
+            <button type="submit">{ isLoading? <span style={{ position: 'relative', left: '45%' }}><Loading  type="spin" color="#eaeaea" width={ 25 } height={ 25 } /></span> : 'Login' }</button>
           </div>
         </form>
         <p className="lp-click-here">Don't have an account ? Click <span onClick={ onClickRegister }>Here</span></p>

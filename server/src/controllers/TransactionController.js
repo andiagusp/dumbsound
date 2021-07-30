@@ -90,4 +90,60 @@ const updateApproved = async (req, res) => {
   }
 }
 
-module.exports = { addTransaction, getAllTransaction, updateApproved }
+const searchDate = async (req, res) => {
+  try {
+    console.log(req.body)
+    TransactionValidator.searchValidate(req.body)
+    const result = await TransactionModel.searchDate(req.body)
+    return res.status(200).send({
+      status: 'success',
+      transactions: result
+    })
+  } catch (error) {
+    if (error instanceof ClientError) {
+      console.log(error)
+      const response = res.status(error.statusCode).send({
+        status: 'failed',
+        message: error.message
+      })
+      return response
+    }
+
+    const response = res.status(500).send({
+      status: 'failed',
+      message: error.message
+    })
+    console.log(error)
+    return response
+  }
+}
+
+const getHistoryPayment = async (req, res) => {
+  try {
+    const { id } = req.accessToken
+    const result = await TransactionModel.getPaymentHistoryUser(id)
+
+    return res.status(200).send({
+      status: 'success',
+      transactions: result
+    })
+  } catch (error) {
+    if (error instanceof ClientError) {
+      console.log(error)
+      const response = res.status(error.statusCode).send({
+        status: 'failed',
+        message: error.message
+      })
+      return response
+    }
+
+    const response = res.status(500).send({
+      status: 'failed',
+      message: error.message
+    })
+    console.log(error)
+    return response
+  }
+}
+
+module.exports = { addTransaction, getAllTransaction, updateApproved, searchDate, getHistoryPayment }

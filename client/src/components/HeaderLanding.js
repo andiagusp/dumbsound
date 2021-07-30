@@ -41,6 +41,7 @@ const HeaderLanding = () => {
         {
           (state.isLogin) ?
           <section className="lp-btn-group">
+            <span className="lp-username">{ state.user.fullName }</span>
             <img src={ ProfileImage } className="profile-picture" alt="profile-pic" onClick={ onClickShow }/>
             <DropdownHeader show={ show } setShow={ setShow } context={ state } />
           </section>

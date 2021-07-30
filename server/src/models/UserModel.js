@@ -16,6 +16,7 @@ const UserModel = {
     }
     return ({
       id: result.id,
+      fullName: result.fullName,
       email: result.email,
       status: result.listAs,
       subscribe: result.subscribe
@@ -44,6 +45,7 @@ const UserModel = {
     }
     return ({
       id: result.id,
+      fullName: result.fullName,
       email: result.email,
       status: result.listAs,
       subscribe: result.subscribe

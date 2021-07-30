@@ -4,12 +4,13 @@ import { UserContext } from '../context/UserContext'
 
 
 import Home from './Home'
-import HomePage from './HomePage'
-import Transaction from './Transaction'
-import Payment from './Payment'
+import Music from './Music'
 import Logout from './Logout'
 import Artists from './Artists'
-import Music from './Music'
+import Payment from './Payment'
+import HomePage from './HomePage'
+import Transaction from './Transaction'
+import HistoryPayment from './HistoryPayment'
 
 import PrivateRouteAdmin from './PrivateRouteAdmin'
 
@@ -27,8 +28,9 @@ const PrivateRoute = () => {
           <Route path="/" exact component={ HomePage } />
           </>
         }
-        <Route path="/payment" component={ Payment } />
         <Route path="/logout" component={ Logout } />
+        <Route path="/payment" component={ Payment } />
+        <Route path="/history-payment" component={ HistoryPayment } />
         <Route path="/" component={ HomePage } />
       </Switch>
     </div>

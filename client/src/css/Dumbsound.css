@@ -32,6 +32,14 @@ body {
   box-shadow: 0 5px 5px rgba(10, 10, 10, 0.25);
 }
 
+.lp-username {
+  font-size: 20px;
+  margin-right: 1em;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(200, 200, 200, 1);
+}
+
 .lp-nav,
 .header {
   display: flex;
@@ -142,8 +150,9 @@ body {
   position: fixed;
   padding: 20px;
   width: 50vmax;
-  height: 50vh;
-  top: 20vh;
+  max-height: 50vmax;
+  top: 10vh;
+  overflow-y: auto;
   left: 0;
   right: 0;
   margin: auto;
@@ -154,6 +163,10 @@ body {
   z-index: 3;
   border-radius: 10px;
   box-shadow: 0 1px 5px rgba(210, 210, 210, 0.5);
+}
+
+.t-modal-transaction::-webkit-scrollbar {
+  display: none;
 }
 
 .t-modal-transaction img {
@@ -298,10 +311,12 @@ body {
   position: relative;
   width: 25%;
   background-color: rgba(210, 210, 210, 0.25);
+  z-index: 1;
 }
 
 .form-clip-music-icon {
   position: absolute;
+  z-index: 0;
   right: 0;
   top: 5px;
   cursor: pointer;
@@ -326,11 +341,27 @@ body {
 
 .form-group-music-attache {
   position: relative;
-  width: 10vmax;
-  background-color: rgba(210, 210, 210, .25);
   border-radius: 5px;
-  border: 2px solid #d2d2d2;
   padding: 10px;
+  left: calc(-1em + 3px);
+}
+
+.form-group-music-attache label {
+  cursor: pointer;
+  line-height: 5px;
+}
+
+.form-group-music-attache button[type=button] {
+  border-radius: 5px;
+  border: 2px solid silver;
+  width: 10vmax;
+  padding: 10px;
+  cursor: pointer;
+  background-color: var(--color-red);
+}
+
+.form-group-music-attache button[type=button]:active {
+  opacity: 0.5;
 }
 
 .form-preview-thumbnail,
@@ -347,7 +378,7 @@ body {
 }
 
 .form-preview-thumbnail img {
-  width: 50vmin;
+  width: 30vmin;
 }
 
 .img-preview-thumbnail {
@@ -360,7 +391,8 @@ body {
 .form-group-music-attache p {
   position: absolute;
   font-size: 14px;
-  top: 8px;
+  top: calc(1em + 5px);
+  left: 12em;
   color: rgba(255, 255, 255, .25);
 }
 
@@ -664,7 +696,8 @@ body {
 }
 
 /* transaction */
-.transaction {
+.transaction,
+.historypayment {
   padding: 20px 100px;
 }
 
@@ -724,7 +757,7 @@ body {
 
 /* artists */
 .artists, .music {
-  width: 80vmax;
+  width: 60vmax;
   margin: 30px auto;
 }
 
@@ -790,6 +823,53 @@ body {
 
 .profile-picture {
   border: 2px solid var(--text-white);
+}
+
+/* form search */
+.form-search {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+
+.form-search input[type=text] {
+  width: 20vmax;
+  border-radius: 5px 0 0 5px;
+  font-size: 18px;
+  border: 2px solid #d2d2d2;
+  background-color: rgba(210, 210, 210, 0.25);
+  margin-bottom: 1em;
+  padding: .5em;
+  margin-right: 5px;
+}
+
+.form-search button {
+  height: 3.5em;
+  width: 3.5em;
+  position: relative;
+  border: none;
+  background-color: var(--color-red);
+  padding: em;
+  border-radius: 0 5px 5px 0;
+}
+
+.form-search button:hover {
+  opacity: .8;
+}
+
+.form-search button:active {
+  opacity: .5;
+}
+
+.form-search button span {
+  position: absolute;
+  font-size: 24px;
+  top: 5px;
+  left: 10px;
+}
+
+.form-search input[type=text]:focus {
+  outline: none;
 }
 
 /* overide audio player */

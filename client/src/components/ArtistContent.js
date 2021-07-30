@@ -1,9 +1,10 @@
 import { useState } from 'react'
 
 import { server } from '../config/axios'
+import Loading from './Loading'
 
 const ArtistContent = () => {
-  const [send, setSend] = useState('')
+  const [send, setSend] = useState(false)
 	const [success, setSuccess] = useState('')
 	const [error, setError] = useState('')
   const [input, setInput] = useState({
@@ -19,10 +20,13 @@ const ArtistContent = () => {
   const onSubmitArtist = async (e) => {
     try {
       e.preventDefault()
-      setSend('saving data...')
+      setSend(true)
       const body = JSON.stringify(input)
-      const config = { headers: { 'Content-Type': 'application/json' } }
-      console.log(body);
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
       const res = await server.post('/artist', body, config)
       setSuccess('Success Add Artist')
     } catch (error) {
@@ -37,7 +41,10 @@ const ArtistContent = () => {
     } finally {
       setTimeout(() => setError(''), 5000)
       setTimeout(() => setSuccess(''), 5000)
-			setSend('')
+      setInput({
+        name: '', old: '', type: 'Solo', startCareer: ''
+      })
+			setSend(false)
     }
   }
 
@@ -63,7 +70,7 @@ const ArtistContent = () => {
           <input type="text" name="startCareer" onChange={ onChangeInput } value={ input.startCareer } placeholder="Start a carerr" required="on" />
         </div>
         <div className="form-group-artist form-submit-artist">
-          <button type="submit">{ send ? send : 'Add Artist' }</button>
+          <button type="submit">{ send ? <span style={{ position: 'relative', left: '48%' }}><Loading  type="spin" color="#eaeaea" width={ 25 } height={ 25 } /></span> : 'Add Artist' }</button>
         </div>
       </form>
     </div>
