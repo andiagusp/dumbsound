@@ -1,0 +1,895 @@
+@font-face {
+  font-family: 'product_sansregular';
+  src: local('product_sans_regular-webfont.woff2'), url(../fonts/product-sans-regular.woff) format('woff2'),
+       local('product_sans_regular-webfont.woff'), url(../fonts/product-sans-regular.woff) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --DOM-color: #161616;
+  --modal-overlay: rgba(1, 1, 1, 0.6);
+  --card-color: #3a3a3a;
+  --color-red: #ee4622;
+  --text-white: #fff;
+  --button-add: rgba(245, 128, 51, 1);
+}
+
+body {
+  font-family: 'product_sansregular';
+  background-color: var(--DOM-color);
+  color: var(--text-white);
+  max-width: 1440px;
+  font-size: 14px;
+}
+
+/* header landing page */
+.lp-header {
+  height: 512px;
+  background: url(../image/landing-cover.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 5px 5px rgba(10, 10, 10, 0.25);
+}
+
+.lp-username {
+  font-size: 20px;
+  margin-right: 1em;
+  color: rgba(255, 255, 255, 1);
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(200, 200, 200, 1);
+}
+
+.lp-nav,
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background-color: transparent;
+}
+
+.header {
+  background-color: rgba(31, 31, 31, 1);
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.25));
+}
+
+.lp-icon > img,
+.header-left > img {
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.lp-button-group {
+  position: relative;
+}
+
+.header-right > img,
+.lp-btn-group > img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.lp-btn-login,
+.lp-btn-register {
+  width: 100px;
+  border-radius: 5px;
+  padding: 6px;
+  font-weight: 700;
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.lp-btn-register {
+  background-color: var(--color-red);
+  border: none;
+}
+
+.lp-btn-login {
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+
+.lp-btn-login:active,
+.lp-btn-register:active {
+  opacity: 0.5;
+}
+
+.lp-text-jumbotron {
+  transform: translateY(100px);
+  text-align: center;
+  text-shadow: 2px 5px 5px rgba(11, 11, 11, 100);
+}
+
+.lp-text-title {
+  font-size: 48px;
+  margin-bottom: 0;
+}
+
+.lp-text-second {
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+/* modal */
+.lp-modal,
+.t-modal-attache {
+  position: fixed;
+  background-color: var(--modal-overlay);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  box-sizing: border-box;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.lp-modal-content-login,
+.lp-modal-content-register {
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 10px;
+  width: 420px;
+  background-color: var(--DOM-color);
+  z-index: 3;
+}
+
+.t-modal-transaction {
+  position: fixed;
+  padding: 20px;
+  width: 50vmax;
+  max-height: 50vmax;
+  top: 10vh;
+  overflow-y: auto;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: var(--DOM-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px rgba(210, 210, 210, 0.5);
+}
+
+.t-modal-transaction::-webkit-scrollbar {
+  display: none;
+}
+
+.t-modal-transaction img {
+  box-shadow: 0 1px 5px rgba(210, 210, 210, 0.5);
+  object-fit: cover;
+  max-width: 40vmax;
+  max-height: 40vmax;
+}
+
+.t-modal-transaction .t-close-button {
+  z-index: 4;
+  position: absolute;
+  font-size: 20px;
+  cursor: pointer;
+  top: 0;
+  right: 1em;
+  transition: .8s ease all;
+}
+
+.t-close-button:hover {
+  transform: rotate(360deg);
+}
+
+.t-close-button:active {
+  opacity: .5;
+}
+
+.lp-modal-content-login {
+  top: 100px;
+  padding: 30px;
+}
+
+.lp-modal-content-register {
+  top: 25px;
+  padding: 15px 30px;
+}
+
+.lp-modal-title {
+  font-weight: 800;
+  font-size: 36px;
+  color: #fff;
+  margin-bottom: 1em;
+}
+
+.form-group-modal input[type=text],
+.form-group-artist input[type=text],
+.form-group-music input[type=text],
+.form-group-modal input[type=email],
+.form-group-modal input[type=password],
+.form-group-modal input[type=number],
+.form-group-music input[type=number],
+.form-group-artist input[type=number],
+.form-group-modal button[type=submit],
+.form-group-modal select,
+.form-group-music select,
+.form-group-artist select,
+.form-group-modal textarea {
+  width: 100%;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.lp-modal-content-register input[type=text],
+.lp-modal-content-register input[type=password],
+.lp-modal-content-register input[type=number],
+.lp-modal-content-register button[type=submit],
+.lp-modal-content-register textarea {
+  padding: 5px 10px;
+}
+
+.form-group-modal input[type=text],
+.form-group-artist input[type=text],
+.form-group-music input[type=text],
+.form-group-music input[type=number],
+.form-group-modal input[type=email],
+.form-group-modal input[type=password],
+.form-group-artist input[type=number],
+.form-group-modal input[type=number],
+.form-group-modal select,
+.form-group-music select,
+.form-group-artist select,
+.form-attached-image,
+.form-group-modal textarea {
+  border: 2px solid #d2d2d2;
+  background-color: rgba(210, 210, 210, 0.25);
+  margin-bottom: 20px;
+}
+
+.form-group-modal select > option,
+.form-group-music select > option,
+.form-group-artist select > option {
+  background-color: var(--card-color);
+  border-radius: 10px;
+}
+
+.form-group-modal button[type=submit] {
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 800;
+  background-color: var(--color-red);
+}
+
+.lp-modal-content-register button[type=submit] {
+  padding: 10px;
+}
+
+.lp-modal-content-login button[type=submit] {
+  margin-top: 20px;
+}
+
+.form-group-modal input[type=text]:focus,
+.form-group-artist input[type=text]:focus,
+.form-group-music input[type=text]:focus,
+.form-group-modal input[type=email]:focus,
+.form-group-modal input[type=password]:focus,
+.form-group-modal input[type=number]:focus,
+.form-group-music input[type=number]:focus,
+.form-group-artist input[type=number]:focus,
+.form-group-payment input[type=number]:focus,
+.form-group-modal select:focus,
+.form-group-music select:focus,
+.form-group-artist select:focus,
+.form-group-modal textarea:focus {
+  outline: none;
+}
+
+.form-music-append {
+  display: flex;
+}
+
+.form-append-text {
+  width: 75%;
+}
+
+.form-append-file {
+  height: 50px;
+  border-radius: 5px;
+  border: 2px solid #d2d2d2;
+  margin-left: 5px;
+  position: relative;
+  width: 25%;
+  background-color: rgba(210, 210, 210, 0.25);
+  z-index: 1;
+}
+
+.form-clip-music-icon {
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  top: 5px;
+  cursor: pointer;
+  font-size: 30px;
+  color: var(--color-red);
+  transform: rotate(45deg) scaleY(-1);
+}
+
+.form-append-file p {
+  font-size: 18px;
+  position:  absolute;
+  top: 10px;
+  left: 3px;
+  color: rgba(255, 255, 255, .25);
+}
+
+.form-append-file input[type=file] {
+  display: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.form-group-music-attache {
+  position: relative;
+  border-radius: 5px;
+  padding: 10px;
+  left: calc(-1em + 3px);
+}
+
+.form-group-music-attache label {
+  cursor: pointer;
+  line-height: 5px;
+}
+
+.form-group-music-attache button[type=button] {
+  border-radius: 5px;
+  border: 2px solid silver;
+  width: 10vmax;
+  padding: 10px;
+  cursor: pointer;
+  background-color: var(--color-red);
+}
+
+.form-group-music-attache button[type=button]:active {
+  opacity: 0.5;
+}
+
+.form-preview-thumbnail,
+.form-preview-attache-music {
+  position: relative;
+}
+
+.audio-name {
+  width: 50vmax;
+  position: absolute;
+  font-size: 24px;
+  color: #fff;
+  left: 10em;
+}
+
+.form-preview-thumbnail img {
+  width: 30vmin;
+}
+
+.img-preview-thumbnail {
+  position: absolute;
+  top: -3em;
+  right: 0;
+  box-shadow: 0 5px 5px rgba(10, 10, 10, .5);
+}
+
+.form-group-music-attache p {
+  position: absolute;
+  font-size: 14px;
+  top: calc(1em + 5px);
+  left: 12em;
+  color: rgba(255, 255, 255, .25);
+}
+
+.form-group-music-attache input[type=file]{
+  display: none;
+}
+
+.form-submit-artist,
+.form-submit-music {
+  text-align: center;
+}
+
+.form-group-music button[type=submit] {
+  margin-top: 20px;
+}
+
+
+.form-group-artist button[type=submit],
+.form-group-music button[type=submit] {
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 800;
+  border: none;
+  padding: 10px;
+  width: 50vmin;
+  background-color: var(--button-add);
+  color: var(--text-white);
+}
+
+.form-group-modal button[type=submit]:active,
+.form-group-artist button[type=submit]:active,
+.form-group-music button[type=submit]:active {
+  opacity: 0.5;
+  background-color: #fff;
+  color: var(--color-red);
+}
+
+.lp-click-here {
+  font-size: 18px;
+  text-align: center;
+  color: rgba(177, 177, 177, 1);
+}
+
+.lp-click-here span {
+  font-weight: 800;
+  color: rgba(177, 177, 177, 0.5);
+  cursor: pointer;
+}
+
+.lp-click-here span:active {
+  opacity: 0.5;
+}
+
+/* landing body */
+.lp-body {
+  margin: 40px 20px;
+}
+
+.lpb-title {
+  color: var(--color-red);
+  font-weight: 700;
+  text-align: center;
+  font-size: 24px;
+}
+
+.lpb-alert-subscribe {
+  color: var(--text-white);
+  text-align: center;
+  font-size: 20px;
+}
+
+.lpb-alert-subscribe span {
+  cursor: pointer;
+  font-size: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, .5);
+}
+
+.lpb-alert-subscribe span:hover {
+  opacity: .7;
+  text-decoration: underline;
+}
+
+.lpb-wrapper-music {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px;
+  padding-bottom: 30px;
+}
+
+.lpb-card-music {
+  height: 240px;
+  width: 190px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin: 10px;
+  background-color: var(--card-color);
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(100, 100, 100, 0.8),
+              0 -2px 5px rgba(100, 100, 100, 0.8);
+}
+
+.lpb-card-music:active {
+  opacity: 0.5;
+}
+
+.lpb-card-img {
+  width: 160px;
+  height: 150px;
+}
+
+.lpb-card-music > img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.lpb-card-music > p {
+  margin-top: -1em;
+}
+
+.lpb-music-ty {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.lpb-title-music {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* payment body */
+.pay-wrapper {
+  text-align: center;
+  margin: auto;
+  width: 50vmax;
+  padding-bottom: 30px;
+}
+
+.pay-title {
+  font-weight: 800;
+  font-size: 36px;
+  color: inherit;
+  margin: 20px 0;
+}
+
+.pay-description {
+  font-size: 18px;
+  color: #03fcfc;
+}
+
+.pay-done-subscribe {
+  font-size: 10em;
+  color: rgba(0, 242, 77, 1.0);
+}
+
+.pay-message-subscribe {
+  font-size: 3em;
+}
+
+.pay-back-home {
+  font-size: 2em;
+  text-decoration: underline;
+}
+
+
+.pay-back-home:hover {
+  opacity: .5;
+  cursor: pointer;
+}
+
+.DUMB,
+.SOUND {
+  font-weight: 900;
+}
+
+.DUMB {
+  color: var(--color-red);
+}
+
+.SOUND {
+  color: var(--text-white);
+}
+
+.form-payment {
+  margin-top: 30px;
+}
+
+.form-payment > * {
+  margin: 20px 0;
+}
+
+.form-group-payment input[type=number],
+.form-group-payment button[type=submit] {
+  width: 50%;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.form-group-payment input[type=number] {
+  border: 2px solid #d2d2d2;
+  background-color: rgba(210, 210, 210, 0.25);
+}
+
+.form-group-payment button[type=submit] {
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  background-color: var(--color-red);
+  font-weight: 800;
+}
+
+.form-group-payment button[type=submit]:active {
+  opacity: 0.5;
+}
+
+.form-image-preview {
+  width: 50%;
+}
+
+.form-group-payment input[type=file] {
+  display: none;
+  width: 50%;
+  cursor: pointer;
+}
+
+.form-attached-image {
+  width: 50%;
+  margin: auto;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 18px;
+  background-color: var(--DOM-color);
+  position: relative;
+}
+
+.form-group-payment label {
+  color: var(--color-red);
+  font-weight: 800;
+  cursor: pointer;
+  margin: 0;
+  left: -10%;
+  position: relative;
+}
+
+.form-clip-icon {
+  position: absolute;
+  top: -2px;
+  font-size: 24px;
+  right: -50%;
+  transform: rotate(-135deg) scaleX(-1);
+  color: var(--color-red);
+}
+
+.error-message {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(54, 56, 64, 1);
+}
+
+.mp-close-button {
+  position: fixed;
+  right: 2em;
+  bottom: 4.5em;
+  font-size:  18px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, .5);
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  text-align: center;
+  transition: 0.8s ease all;
+}
+
+.mp-close-text {
+  position: absolute;
+  top: 5px;
+  left: 13px;
+  transition: 0.8s ease all;
+}
+
+.mp-close-button:hover {
+  background: rgba(255, 255, 255, .3);
+}
+
+.mp-close-button:active {
+  opacity: 0.5;
+  transform: scale(0);
+}
+
+.mp-close-button:hover .mp-close-text {
+  transform: rotate(360deg);
+  color: #000;
+}
+
+/* transaction */
+.transaction,
+.historypayment {
+  padding: 20px 100px;
+}
+
+.t-title,
+.m-title,
+.a-title {
+  font-weight: 700;
+  margin-bottom: 1em;
+  color: var(--text-white);
+}
+
+.t-table-wrapper {
+  background-color: white;
+}
+
+.table th {
+  border-top: none;
+}
+
+.t-table-wrapper thead tr {
+  color: var(--color-red);
+  font-size: 14px;
+  background-color: rgba(43, 43, 43, 1.0);
+}
+.t-table-wrapper tbody tr:nth-child(even) {
+  font-size: 14px;
+  color: var(--text-white);
+  background-color: rgba(43, 43, 43, 1.0);
+}
+
+.t-table-wrapper tbody tr:nth-child(odd) {
+  font-size: 14px;
+  color: var(--text-white);
+ background-color: rgba(58, 58, 58, 1.0);
+}
+
+.t-attache-name:hover {
+  cursor: pointer;
+  color: rgba(202, 237, 234, 0.8);
+}
+
+.t-attache-name:active {
+  opacity: .5;
+}
+/* modal drowpdown action */
+.t-table-dropdown {
+  text-align: center;
+}
+
+.t-table-dai {
+  cursor: pointer;
+}
+
+.t-da-menu {
+  background-color: rgba(58, 58, 58, 1.0);
+}
+
+/* artists */
+.artists, .music {
+  width: 60vmax;
+  margin: 30px auto;
+}
+
+/* dropdown header */
+.dropdownheader {
+  position: relative;
+  z-index: 5;
+  font-size: 18px;
+  font-weight: 800;
+  border-radius: 5px;
+  position: absolute;
+  background-color: var(--card-color);
+  width: 220px;
+  top: 6em;
+  right: 2em;
+  box-shadow: 2px 2px 5px rgba(10, 10, 10, .5),
+              -2px -2px 5px rgba(10, 10, 10, .5);
+}
+
+.dropdownheader:before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -1em;
+  right: .5em;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 30px solid var(--card-color);
+}
+
+.dd-route, .dd-logout {
+  cursor: pointer;
+  margin: 20px;
+}
+
+.dd-route > * {
+  margin: 10px 0;
+}
+
+
+.dd-route-group:hover img,
+.dd-route-group:hover span {
+  opacity: .5;
+}
+
+.dd-divider {
+  border-bottom: 2px solid rgba(255, 255, 255, .5);
+}
+
+.dd-icon {
+  font-size: 24px;
+  margin-right: .5em;
+  font-weight: 800;
+  color: var(--color-red);
+}
+
+.dd-logout:hover img,
+.dd-logout:hover span {
+  opacity: .5;
+}
+
+.profile-picture {
+  border: 2px solid var(--text-white);
+}
+
+/* form search */
+.form-search {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+
+.form-search input[type=text] {
+  width: 20vmax;
+  border-radius: 5px 0 0 5px;
+  font-size: 18px;
+  border: 2px solid #d2d2d2;
+  background-color: rgba(210, 210, 210, 0.25);
+  margin-bottom: 1em;
+  padding: .5em;
+  margin-right: 5px;
+}
+
+.form-search button {
+  height: 3.5em;
+  width: 3.5em;
+  position: relative;
+  border: none;
+  background-color: var(--color-red);
+  padding: em;
+  border-radius: 0 5px 5px 0;
+}
+
+.form-search button:hover {
+  opacity: .8;
+}
+
+.form-search button:active {
+  opacity: .5;
+}
+
+.form-search button span {
+  position: absolute;
+  font-size: 24px;
+  top: 5px;
+  left: 10px;
+}
+
+.form-search input[type=text]:focus {
+  outline: none;
+}
+
+/* overide audio player */
+
+.progress-bar {
+  background-color: transparent !important;
+}
+
+.react-jinke-music-player-main .music-player-panel .panel-content .rc-slider-handle,
+.react-jinke-music-player-main .music-player-panel .panel-content .rc-slider-track {
+  background-color: var(--color-red) !important;
+}
+
+/* overide dropdown ant */
+.ant-dropdown-placement-bottomCenter > .ant-dropdown-arrow,
+.ant-dropdown-placement-bottomLeft > .ant-dropdown-arrow,
+.ant-dropdown-placement-bottomRight > .ant-dropdown-arrow {
+  border-left-color: var(--card-color);
+  border-top-color: var(--card-color);
+}
+
+@media screen and (max-width: 1200px) {
+}
